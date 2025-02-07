@@ -1,19 +1,12 @@
-import { useMemo, useState } from "react";
-import { sliceAndTransformBirths } from "./lib/helpers";
-import { useQueryBirthdaysToday } from "./lib/hooks/use-query-birthdays-today";
-
-const PAGE_NUMBER = 1;
+import { useState } from "react";
+import { usePaginatedTodaysBirths } from "./lib/hooks/use-paginated-todays-births";
+import { RECORDS_PER_PAGE } from "./lib/constants";
+import { usePageParam } from "./lib/hooks/use-page-param";
 
 export function App() {
   const [showFetchButton, setShowFetchButton] = useState(true);
-  const { data, status, refetch } = useQueryBirthdaysToday();
-
-  console.log(status);
-
-  const birthRecords = useMemo(() => {
-    if (status !== "success") return [];
-    return sliceAndTransformBirths(data ?? [], PAGE_NUMBER); // page number should not be hardcoded
-  }, [data, status]);
+  const { currentPage, setPage } = usePageParam();
+  const { birthRecords, status, refetch } = usePaginatedTodaysBirths(currentPage, RECORDS_PER_PAGE);
 
   if (showFetchButton)
     return (
@@ -35,6 +28,20 @@ export function App() {
 
   return (
     <div>
+      <button
+        onClick={() => {
+          setPage(currentPage + 1);
+        }}
+      >
+        +
+      </button>
+      <button
+        onClick={() => {
+          setPage(currentPage - 1);
+        }}
+      >
+        -
+      </button>
       {birthRecords.map((birth) => {
         return (
           <div key={birth.name}>
