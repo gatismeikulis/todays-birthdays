@@ -1,7 +1,6 @@
-import { useEffect } from "react";
 import { useSearchParams } from "react-router";
 
-export function usePageParam(defaultPage = 1) {
+export function usePageParam() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const setPage = (page: number) => {
@@ -15,25 +14,7 @@ export function usePageParam(defaultPage = 1) {
 
   const pageParam = searchParams.get("page");
 
-  let currentPage = defaultPage;
-
-  // handle case when 'page' param is there and it's a valid page number
-  if (pageParam !== null) {
-    const parsed = parseInt(pageParam, 10);
-    if (isPageParamValidPageNumber(parsed)) {
-      currentPage = parsed;
-    }
-  }
-
-  // handles rare cases on page load when 'page' param is there and it's not a valid page number
-  useEffect(() => {
-    if (pageParam !== null) {
-      const parsed = parseInt(pageParam, 10);
-      if (!isPageParamValidPageNumber(parsed)) {
-        setPage(defaultPage);
-      }
-    }
-  }, []);
+  const currentPage = extractCurrentPage(pageParam);
 
   return {
     currentPage,
@@ -41,6 +22,10 @@ export function usePageParam(defaultPage = 1) {
   };
 }
 
-function isPageParamValidPageNumber(num: number) {
-  return !(Number.isNaN(num) || num < 1);
+function extractCurrentPage(pageParam: string | null) {
+  const defaultPage = 1;
+  if (pageParam === null) return defaultPage;
+  const parsed = +pageParam;
+  if (Number.isNaN(parsed) || parsed < 1) return defaultPage;
+  return Math.floor(parsed);
 }
