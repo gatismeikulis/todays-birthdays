@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { birthsResponseSchema } from "../schemas";
-import { getTodaysMonthAndDayZeroPadded } from "../utils";
+import { getMonthAndDayZeroPadded } from "../utils";
 import { Birth } from "../types";
 
 const BASE_URL = "https://api.wikimedia.org/feed/v1/wikipedia/en/onthisday/births";
@@ -20,7 +20,8 @@ export function useQueryTodaysBirths(enabled = false) {
 }
 
 async function fetchBirths(): Promise<Birth[]> {
-  const { day, month } = getTodaysMonthAndDayZeroPadded();
+  const dateToday = new Date();
+  const { day, month } = getMonthAndDayZeroPadded(dateToday);
   const response = await fetch(`${BASE_URL}/${month}/${day}`);
   if (!response.ok) {
     throw new Error("Network response was not ok");

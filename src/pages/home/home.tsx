@@ -6,7 +6,7 @@ import styles from "./home.module.css";
 export function Home() {
   return (
     <Container>
-      <h1 className={styles.title}>Today's Birthdays - {getDateFormatted()} </h1>
+      <h1 className={styles.title}>Today's Birthdays - {getDateFormatted(new Date())} </h1>
       <BirthsBlock />
     </Container>
   );

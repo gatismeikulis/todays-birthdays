@@ -22,7 +22,10 @@ export function BirthsBlock() {
       currentPage,
       itemsPerPage: RECORDS_PER_PAGE,
     });
-    const birthRecords = data.slice(startIndex, endIndex).map(transformBirthData);
+    const isSmallScreen = window.innerWidth < 600; // Assuming user is on mobile screen if width is less than 600px
+    const birthRecords = data
+      .slice(startIndex, endIndex)
+      .map((birth) => transformBirthData(birth, isSmallScreen));
     return { birthRecords, totalPages };
   }, [currentPage, data]);
 
