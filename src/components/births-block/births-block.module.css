@@ -1,0 +1,84 @@
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.item {
+  height: 100%;
+}
+
+.buttonWrapper {
+  text-align: center;
+  flex: 1;
+  padding-top: calc(var(--step) * 64);
+  animation: buttonAppears 0.8s ease-out forwards;
+}
+
+.list > * {
+  animation: itemAppears 0.5s ease-out backwards;
+}
+
+.list > *:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.list > *:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.list > *:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.list > *:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.list > *:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.list > *:nth-child(6) {
+  animation-delay: 0.6s;
+}
+.list > *:nth-child(7) {
+  animation-delay: 0.7s;
+}
+.list > *:nth-child(8) {
+  animation-delay: 0.8s;
+}
+.list > *:nth-child(9) {
+  animation-delay: 0.9s;
+}
+.list > *:nth-child(10) {
+  animation-delay: 1s;
+}
+.list > *:nth-child(11) {
+  animation-delay: 1.1s;
+}
+.list > *:nth-child(12) {
+  animation-delay: 1.2s;
+}
+
+@keyframes itemAppears {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes buttonAppears {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translateY(20px);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.1) translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}

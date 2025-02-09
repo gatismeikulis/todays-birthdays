@@ -1,0 +1,10 @@
+.header {
+  padding: calc(var(--step) * 4);
+  border-bottom: 1px solid var(--border-color);
+  width: 100%;
+}
+
+.header p {
+  text-align: center;
+  color: var(--text-secondary);
+}

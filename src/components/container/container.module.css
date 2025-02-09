@@ -1,0 +1,12 @@
+.container {
+  padding: calc(var(--step) * 2);
+  width: 100%;
+}
+
+@media screen and (min-width: 1024px) {
+  .container {
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: calc(var(--step) * 4);
+  }
+}

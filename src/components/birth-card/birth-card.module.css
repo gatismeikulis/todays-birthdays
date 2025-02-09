@@ -1,0 +1,76 @@
+.card {
+  padding: calc(var(--step) * 8);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background-color: white;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.textWrapper {
+  flex-grow: 1;
+}
+
+.year {
+  color: var(--primary-color);
+  margin: 0 0 0.75rem 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.year::after {
+  content: "";
+  height: 2px;
+  flex: 1;
+  background: linear-gradient(to right, var(--primary-color-light), transparent);
+  border-radius: 2px;
+}
+
+.name {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.description {
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.imageWrapper {
+  margin-top: 1.5rem;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.image {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  object-position: top;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover .image {
+  transform: scale(1.05);
+}
+
+.link {
+  color: var(--primary-color);
+  font-weight: 600;
+  text-decoration: none;
+  margin-top: calc(var(--step) * 4);
+}

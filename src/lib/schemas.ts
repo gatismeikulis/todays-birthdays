@@ -5,7 +5,7 @@ export const birthSchema = z.object({
   year: z.number(),
   pages: z.array(
     z.object({
-      originalimage: z
+      thumbnail: z
         .object({
           source: z.string(),
         })

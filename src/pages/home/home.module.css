@@ -1,0 +1,5 @@
+.title {
+  color: var(--primary-color);
+  text-align: center;
+  margin: calc(var(--step) * 8) 0 calc(var(--step) * 4) 0;
+}

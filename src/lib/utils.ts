@@ -6,3 +6,10 @@ export function getTodaysMonthAndDayZeroPadded() {
   const day = rawDay.toString().padStart(2, "0");
   return { month, day };
 }
+
+export function getDateFormatted(): string {
+  return new Intl.DateTimeFormat("en-US", {
+    month: "long",
+    day: "numeric",
+  }).format(new Date());
+}

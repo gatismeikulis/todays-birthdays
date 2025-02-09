@@ -32,6 +32,7 @@ export default tseslint.config(
       "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
       ...pluginQuery.configs.recommended.rules,
       "@typescript-eslint/no-non-null-assertion": "warn",
+      "@typescript-eslint/no-floating-promises": "warn",
       "@typescript-eslint/consistent-type-definitions": "off",
     },
   },
