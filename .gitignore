@@ -22,3 +22,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+lp-fe-homework.bundle
+task-description.md

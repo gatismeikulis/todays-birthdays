@@ -26,7 +26,7 @@ async function fetchBirths(): Promise<Birth[]> {
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }
-  const jsonData = await response.json();
+  const jsonData: unknown = await response.json();
   // validate data using Zod schema
   const result = birthsResponseSchema.safeParse(jsonData);
   if (!result.success) {
