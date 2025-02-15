@@ -15,7 +15,7 @@ describe("BirthCard Component", () => {
 
   test("renders birth card with given props", () => {
     render(<BirthCard record={birthRecord} />);
-    expect(screen.getByText("John Doe")).toBeInTheDocument();
+    expect(screen.getByText("John Doe")).toBeVisible();
     expect(screen.getByText("1990")).toBeInTheDocument();
     expect(screen.getByText("A famous person")).toBeInTheDocument();
     expect(screen.getByRole("img")).toHaveAttribute("src", "http://example.com/image.jpg");

@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { useQueryTodaysBirths } from "../../lib/hooks/use-query-todays-births";
+import { useQueryBirthsOnDate } from "../../lib/hooks/use-query-todays-births";
 import { usePageParam } from "../../lib/hooks/use-page-param";
 import { RECORDS_PER_PAGE } from "../../lib/constants";
 import { BirthCard } from "../birth-card/birth-card";
@@ -10,9 +10,12 @@ import styles from "./births-block.module.css";
 import { Modal } from "../modal/modal";
 import { Spinner } from "../spinner/spinner";
 
+const today = new Date();
+
 export function BirthsBlock() {
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [showFetchButton, setShowFetchButton] = useState(true);
-  const { data, status, refetch } = useQueryTodaysBirths();
+  const { data, status, isLoading } = useQueryBirthsOnDate(selectedDate);
   const { currentPage, setPage } = usePageParam();
 
   const { birthRecords, totalPages } = useMemo(() => {
@@ -31,18 +34,24 @@ export function BirthsBlock() {
 
   function getTodaysBirths() {
     setShowFetchButton(false);
-    refetch();
+    setSelectedDate(today);
   }
 
   if (showFetchButton) {
     return (
       <div className={styles.buttonWrapper}>
-        <Button onClick={getTodaysBirths}>Click here to discover today's birthdays!</Button>
+        <Button type="button" onClick={getTodaysBirths}>
+          Click here to discover today's birthdays!
+        </Button>
       </div>
     );
   }
 
-  if (status === "pending") return <Spinner />;
+  if (isLoading) return <Spinner />;
+
+  function isSpecificDay(date: Date, day: number, month: number): boolean {
+    return date.getDate() === day && date.getMonth() === month;
+  }
 
   if (status === "error")
     return (
@@ -57,6 +66,40 @@ export function BirthsBlock() {
 
   return (
     <div>
+      <div className={styles.nextPrevButtons}>
+        <Button
+          type="button"
+          onClick={() => {
+            setSelectedDate((current) => {
+              const newDate = new Date(current ?? today);
+              if (isSpecificDay(newDate, 1, 2)) {
+                return new Date(2000, 1, 29);
+              } else {
+                newDate.setDate(newDate.getDate() - 1);
+                return newDate;
+              }
+            });
+          }}
+        >
+          Explore day before
+        </Button>
+        <Button
+          type="button"
+          onClick={() => {
+            setSelectedDate((current) => {
+              const newDate = new Date(current ?? today);
+              if (isSpecificDay(newDate, 28, 1)) {
+                return new Date(2000, 1, 29);
+              } else {
+                newDate.setDate(newDate.getDate() + 1);
+                return newDate;
+              }
+            });
+          }}
+        >
+          Expore next day
+        </Button>
+      </div>
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}

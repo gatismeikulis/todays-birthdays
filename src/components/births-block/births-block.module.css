@@ -16,6 +16,13 @@
   animation: buttonAppears 0.8s ease-out forwards;
 }
 
+.nextPrevButtons {
+  display: flex;
+  justify-content: center;
+  gap: calc(var(--step) * 4);
+  margin-bottom: 2rem;
+}
+
 .list > * {
   animation: itemAppears 0.5s ease-out backwards;
 }
